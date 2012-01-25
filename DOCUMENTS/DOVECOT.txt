@@ -143,3 +143,17 @@ Note: The above text describes the configuration for dovecot 1.0 & 1.1 quota tab
 If you use dovecot 1.2 or newer, 
 - use the 'quota2' table (also created by setup.php)
 - set $CONF['new_quota_table'] = 'YES'
+
+
+4. Dovecot pop3 restriction support (optional)
+----------------------------------------------
+
+If you want to restrict some users to only POP3 access, you can enable this by changing the user_password query in dovecot:
+
+password_query = SELECT username AS user,password FROM mailbox WHERE username = '%u' AND active='1' AND (imapActive = '1' or '%Ls' = 'pop3')
+
+Enable imap_switch in Postfixadmin config.inc.php
+
+$CONF['imap_switch'] = 'YES';
+
+

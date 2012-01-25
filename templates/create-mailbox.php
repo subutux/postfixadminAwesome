@@ -55,6 +55,14 @@ if(isset($_SESSION['list_virtual_sticky_domain'])) {
    </tr>
    <?php } ?>
    <tr>
+   <?php if ($CONF['imap_switch'] == 'YES') { ?>
+   <tr>
+      <td><?php print $PALANG['pEnable_mailbox_imap'] . ":"; ?></td>
+      <td><input class="flat" type="checkbox" name="fImap" checked /></td>
+      <td><?php print $pEnable_mailbox_imap_text; ?></td>
+   </tr>
+   <?php } ?>
+   <tr>
       <td><?php print $PALANG['pCreate_mailbox_active'] . ":"; ?></td>
       <td><input class="flat" type="checkbox" name="fActive" checked /></td>
       <td>&nbsp;</td>

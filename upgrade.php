@@ -108,7 +108,7 @@ _do_upgrade($version);
 function _do_upgrade($current_version) {
     global $CONF;
     # $target_version = preg_replace('/[^0-9]/', '', '$Revision: 969 $');
-    $target_version = 740; # hardcoded target version for 2.3 branch - increase (by one) if database changes in the branch are necessary
+    $target_version = 1000; # hardcoded target version for 1.0 branch of postfixadminAwesome - increase (by one) if database changes in the branch are necessary
 
     if ($current_version >= $target_version) {
         # already up to date
@@ -1192,3 +1192,9 @@ function upgrade_740_pgsql() { # upgrade_968_pgsql() in SVN trunk
     db_query_parsed("ALTER TABLE $table_mailbox ALTER COLUMN quota    type bigint");
 }
 
+function upgrade_1000() {
+    $table_mailbox = table_by_key('mailbox');
+
+    # Add imap switch
+    db_query_parsed("ALTER TABLE $table_mailbox ADD imapActive VARCHAR(1) AFTER quota");
+}

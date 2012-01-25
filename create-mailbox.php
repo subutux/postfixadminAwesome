@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     isset ($_POST['fQuota']) ? $fQuota = intval($_POST['fQuota']) : $fQuota = 0;
     isset ($_POST['fActive']) ? $fActive = escape_string ($_POST['fActive']) : $fActive = "1";
     if (isset ($_POST['fMail'])) $fMail = escape_string ($_POST['fMail']);
+    isset ($_POST['fImap']) ? $fImap = "1" : $fImap = "0";
 
 
     if ( (!check_owner ($SESSID_USERNAME, $fDomain)) && (!authentication_has_role('global-admin')) )
@@ -216,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
             $local_part = $matches[1];
         }
 
-        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$fDomain',NOW(),NOW(),'$sqlActive')");
+        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,imapActive,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$fMail','$fDomain',NOW(),NOW(),'$sqlActive')");
         if ($result['rows'] != 1 || !mailbox_postcreation($fUsername,$fDomain,$maildir, $quota))
         {
             $tDomain = $fDomain;
