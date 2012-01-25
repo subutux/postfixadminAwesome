@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+# debian/rules makefile for postfixadmin
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/quilt/quilt.make
+
+build: build-stamp
+
+build-stamp: $(QUILT_STAMPFN)
+	dh_testdir
+	#dh_testroot
+	touch build-stamp
+
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	dh_clean
+	debconf-updatepo
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+	dh_install
+	mv debian/postfixadmin/usr/share/postfixadmin/config.inc.php debian/postfixadmin/etc/postfixadmin/config.inc.php
+	find debian/postfixadmin -name .svn | xargs -r rm -r
+	cp debian/confd-link.sh debian/postfixadmin/usr/share/postfixadmin/
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdebconf
+	dh_installdocs -X.svn
+	dh_installexamples -X.svn
+	dh_link
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch:
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install
