@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     isset ($_POST['fQuota']) ? $fQuota = intval($_POST['fQuota']) : $fQuota = 0;
     isset ($_POST['fActive']) ? $fActive = escape_string ($_POST['fActive']) : $fActive = "1";
     if (isset ($_POST['fMail'])) $fMail = escape_string ($_POST['fMail']);
-    isset ($_POST['fImap']) ? $fImap = "1" : $fImap = "0";
+    isset ($_POST['fImap']) ? $fImap = escape_string ($_POST['fImap']) : $fImap = "0";
 
 
     if ( (!check_owner ($SESSID_USERNAME, $fDomain)) && (!authentication_has_role('global-admin')) )
