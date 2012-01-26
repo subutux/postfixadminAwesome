@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET")
       if ('pgsql'==$CONF['database_type']) {
          $tActive = ('t'==$user_details['active']) ? 1 : 0;
       }
+      $tImap = $user_details["imapActive"];
 
       $result = db_query ("SELECT * FROM $table_domain WHERE domain='$fDomain'");
       if ($result['rows'] == 1)
@@ -97,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
    if (isset ($_POST['fName'])) $fName = escape_string ($_POST['fName']);
    if (isset ($_POST['fQuota'])) $fQuota = intval ($_POST['fQuota']);
    if (isset ($_POST['fActive'])) $fActive = escape_string ($_POST['fActive']);
+   if (isset ($_POST['fImap'])) $fActive = escape_string ($_POST['fImap']);
 
    if($fPassword != $user_details['password'] || $fPassword2 != $user_details['password']){
       $min_length = $CONF['min_password_length'];
@@ -137,6 +139,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
          $quota = 0;
       }
 
+      if ($fImap == "on")
+      {
+         $sqlImap = db_get_boolean(True);
+         $fImap = 1;
+      }
+      else
+      {
+         $sqlImap = db_get_boolean(False);
+         $fImap = 0;
+      }
+
       if ($fActive == "on")
       {
          $sqlActive = db_get_boolean(True);
@@ -151,6 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
       $formvars['name'] = $fName;
       $formvars['quota'] =$quota;
       $formvars['active']=$sqlActive;
+      $formvars['imapActive']=$sqlImap;
       if(preg_match('/^(.*)@/', $fUsername, $matches)) {
          $formvars['local_part'] = $matches[1];
       }
