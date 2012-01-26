@@ -147,6 +147,8 @@ $PALANG['pCreate_mailbox_quota_text'] = 'MB';
 $PALANG['pCreate_mailbox_quota_text_error'] = 'MB<br /><span class="error_msg">De quota die opgaf is te hoog.</span>';
 $PALANG['pEnable_mailbox_imap'] = 'IMAP actief';
 $PALANG['pEnable_mailbox_imap_text'] = '';
+$PALANG['pEnable_mailbox_zpush'] = 'z-push/ActiveSync actief';
+$PALANG['pEnable_mailbox_zpush_text'] = '';
 $PALANG['pCreate_mailbox_active'] = 'Actief';
 $PALANG['pCreate_mailbox_mail'] = 'Mailbox toevoegen';
 $PALANG['pCreate_mailbox_button'] = 'Mailbox toevoegen';

@@ -157,3 +157,22 @@ Enable imap_switch in Postfixadmin config.inc.php
 $CONF['imap_switch'] = 'YES';
 
 
+5. Dovecot & z-push restricition support (optional)
+---------------------------------------------------
+
+with <http://z-push.sourceforge.net>, you can have ActiveSync functionality with your Dovecot
+Imap server. Read the install instructions.
+IMPORTANT: Change the 'IMAP_SERVER' from 'localhost' to '127.0.0.26', so postfix can successfully
+           authenticate against dovecot where z-push can authenticate successfully if the 'zpush' is active & the request local ip is equal to 127.0.0.26 . See the dovecot password query for details.
+
+Configure the dovecot password_query in dovecot-sql.conf:
+
+password_query = SELECT username AS user,password FROM mailbox WHERE username = '%u' AND active='1' AND (imapActive = '1' or '%Ls' = 'pop3') AND (( '127.0.0.26' = '%l'  AND zpush = '1') OR ('127.0.0.26' != '%l'))
+
+EXPLANATION:%l = local ip address, in this case 127.0.0.26 if called by the z-push server.
+            If '127.0.0.26' is local ip address, whe got a zpush authentication.
+            With the "AND zpush = '1'" statement, we check if the zpush server is activated
+            for this account. if so, let it outhenticate successfully, else, return an authentication error. If the '127.0.0.26' is not the local ip address, let it pass.
+
+Suggestion: For clarification of the code (& easy maintenance) you could use a fixed dns name like
+            'dovecot-zpush'. To use this add '127.0.0.26  dovecot-zpush' to your /etc/hosts file and change your z-push imap conf to use 'dovecot-zpush' as imap server & in the password_query of dovecot-sql.conf .

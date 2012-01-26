@@ -53,13 +53,19 @@ if(isset($_SESSION['list_virtual_sticky_domain'])) {
       <td><input class="flat" type="text" name="fQuota" value="<?php print $tQuota; ?>" /></td>
       <td><?php print $pCreate_mailbox_quota_text; ?></td>
    </tr>
-   <?php } ?>
-   <tr>
-   <?php if ($CONF['imap_switch'] == 'YES') { ?>
+   <?php }
+   if ($CONF['imap_switch'] == 'YES') { ?>
    <tr>
       <td><?php print $PALANG['pEnable_mailbox_imap'] . ":"; ?></td>
       <td><input class="flat" type="checkbox" name="fImap" checked /></td>
       <td><?php print $pEnable_mailbox_imap_text; ?></td>
+   </tr>
+   <?php } 
+   if ($CONF['zpush'] == 'YES') { ?>
+   <tr>
+      <td><?php print $PALANG['pEnable_mailbox_zpush'] . ":"; ?></td>
+      <td><input class="flat" type="checkbox" name="fZpush" checked /></td>
+      <td><?php print $pEnable_mailbox_zpush_text; ?></td>
    </tr>
    <?php } ?>
    <tr>

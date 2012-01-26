@@ -1197,4 +1197,6 @@ function upgrade_1000() {
 
     # Add imap switch
     db_query_parsed("ALTER TABLE $table_mailbox ADD imapActive VARCHAR(1) AFTER quota");
+    # Add zpush switch
+    db_query_parsed("ALTER TABLE $table_mailbox ADD zpushActive VARCHAR(1) AFTER imapActive");
 }

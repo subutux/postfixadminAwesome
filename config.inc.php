@@ -191,6 +191,17 @@ $CONF['quota'] = 'NO';
 // You can either use '1024000' or '1048576'
 $CONF['quota_multiplier'] = '1024000';
 
+// Restrict Imap
+// When you want to be able to enable imap for specific users, set this to 'YES'.
+// See INSTALL.txt for instructions with dovecot
+$CONF['imap_switch'] = 'NO';
+
+// Restrict z-push
+// If you want to enable z-push for specific users, set this to 'YES'.
+// See INSTALL.txt for instructions of how to implement this
+// Note: the user must have IMAP enabled to have zpush functionality.
+$CONF['zpush_switch'] = 'NO';
+
 // Transport
 // If you want to define additional transport options for a domain set this to 'YES'.
 // Read the transport file of the Postfix documentation.

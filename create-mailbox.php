@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     isset ($_POST['fActive']) ? $fActive = escape_string ($_POST['fActive']) : $fActive = "1";
     if (isset ($_POST['fMail'])) $fMail = escape_string ($_POST['fMail']);
     isset ($_POST['fImap']) ? $fImap = escape_string ($_POST['fImap']) : $fImap = "0";
+    isset ($_POST['fZpush']) ? $fImap = escape_string ($_POST['fZpush']) : $fImap = "0";
 
 
     if ( (!check_owner ($SESSID_USERNAME, $fDomain)) && (!authentication_has_role('global-admin')) )
@@ -197,6 +198,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
         {
             $sqlActive = db_get_boolean(False);
         }
+        if ($fImap == "on")
+        {
+            $sqlImap = db_get_boolean(True);
+        }
+        else
+        {
+            $sqlImap = db_get_boolean(False);
+        }
+        if ($fZpush == "on")
+        {
+            $sqlZpush = db_get_boolean(True);
+        }
+        else
+        {
+            $sqlZpush = db_get_boolean(False);
+        }
         if ('pgsql'==$CONF['database_type'])
         {
             db_query('BEGIN');
@@ -217,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
             $local_part = $matches[1];
         }
 
-        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,imapActive,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$fMail','$fDomain',NOW(),NOW(),'$sqlActive')");
+        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,imapActive,zpush,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$sqlImap','$sqlZpush','$fMail','$fDomain',NOW(),NOW(),'$sqlActive')");
         if ($result['rows'] != 1 || !mailbox_postcreation($fUsername,$fDomain,$maildir, $quota))
         {
             $tDomain = $fDomain;
