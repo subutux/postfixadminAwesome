@@ -98,7 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
    if (isset ($_POST['fName'])) $fName = escape_string ($_POST['fName']);
    if (isset ($_POST['fQuota'])) $fQuota = intval ($_POST['fQuota']);
    if (isset ($_POST['fActive'])) $fActive = escape_string ($_POST['fActive']);
-   if (isset ($_POST['fImap'])) $fActive = escape_string ($_POST['fImap']);
+   if (isset ($_POST['fImap'])) $fImap = escape_string ($_POST['fImap']);
+   if (isset ($_POST['fZpush'])) $fZpush = escape_string ($_POST['fZpush']);
 
    if($fPassword != $user_details['password'] || $fPassword2 != $user_details['password']){
       $min_length = $CONF['min_password_length'];
