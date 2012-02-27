@@ -72,8 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET")
       $tName = $user_details['name'];
       $tQuota = divide_quota($user_details['quota']);
       $tActive = $user_details['active'];
+      $tImap = $user_details['imapActive'];
+      $tZpush = $user_details['zpushActive'];
       if ('pgsql'==$CONF['database_type']) {
          $tActive = ('t'==$user_details['active']) ? 1 : 0;
+         $tImap = ('t'==$user_details['imapActive']) ? 1 : 0;
+         $tZpush = ('t'==$user_details['zpushActive']) ? 1 : 0;
+
       }
       $tImap = $user_details["imapActive"];
 
