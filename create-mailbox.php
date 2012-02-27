@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
             $local_part = $matches[1];
         }
 
-        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,imapActive,zpush,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$sqlImap','$sqlZpush','$fMail','$fDomain',NOW(),NOW(),'$sqlActive')");
+        $result = db_query ("INSERT INTO $table_mailbox (username,password,name,maildir,local_part,quota,imapActive,zpushActive,domain,created,modified,active) VALUES ('$fUsername','$password','$fName','$maildir','$local_part','$quota','$sqlImap','$sqlZpush','$fDomain',NOW(),NOW(),'$sqlActive')");
         if ($result['rows'] != 1 || !mailbox_postcreation($fUsername,$fDomain,$maildir, $quota))
         {
             $tDomain = $fDomain;
