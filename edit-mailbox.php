@@ -144,6 +144,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
          $sqlImap = db_get_boolean(True);
          $fImap = 1;
       }
+      if ($fZpush == "on")
+      {
+         $sqlZpush = db_get_boolean(True);
+         $fZpush = 1;
+      }
+      else
+      {
+         $sqlZpush = db_get_boolean(False);
+         $fZpush = 0;
+      }
       else
       {
          $sqlImap = db_get_boolean(False);
@@ -165,6 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
       $formvars['quota'] =$quota;
       $formvars['active']=$sqlActive;
       $formvars['imapActive']=$sqlImap;
+      $formvars['zpushActive']=$sqlZpush;
       if(preg_match('/^(.*)@/', $fUsername, $matches)) {
          $formvars['local_part'] = $matches[1];
       }
