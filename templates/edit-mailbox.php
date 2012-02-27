@@ -35,14 +35,14 @@
    if ($CONF['imap_switch'] == 'YES') { ?>
    <tr>
       <td><?php print $PALANG['pEnable_mailbox_imap'] . ":"; ?></td>
-      <td><input class="flat" type="checkbox" name="fImap" checked /></td>
+      <td><input class="flat" type="checkbox" name="fImap" <?php print (!empty ($tImap)) ? 'checked' : '' ?> /></td>
       <td><?php print $pEnable_mailbox_imap_text; ?></td>
    </tr>
    <?php } 
    if ($CONF['zpush_switch'] == 'YES') { ?>
    <tr>
       <td><?php print $PALANG['pEnable_mailbox_zpush'] . ":"; ?></td>
-      <td><input class="flat" type="checkbox" name="fZpush" checked /></td>
+      <td><input class="flat" type="checkbox" name="fZpush" <?php print (!empty ($tZpush)) ? 'checked' : '' ?> /></td>
       <td><?php print $pEnable_mailbox_zpush_text; ?></td>
    </tr>
    <?php } ?>
