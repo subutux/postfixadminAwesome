@@ -39,7 +39,7 @@
       <td><?php print $pEnable_mailbox_imap_text; ?></td>
    </tr>
    <?php } 
-   if ($CONF['zpush'] == 'YES') { ?>
+   if ($CONF['zpush_switch'] == 'YES') { ?>
    <tr>
       <td><?php print $PALANG['pEnable_mailbox_zpush'] . ":"; ?></td>
       <td><input class="flat" type="checkbox" name="fZpush" checked /></td>
