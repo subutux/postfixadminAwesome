@@ -150,6 +150,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
          $sqlImap = db_get_boolean(True);
          $fImap = 1;
       }
+      else
+      {
+         $sqlImap = db_get_boolean(False);
+         $fImap = 0;
+      }
       if ($fZpush == "on")
       {
          $sqlZpush = db_get_boolean(True);
@@ -160,12 +165,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
          $sqlZpush = db_get_boolean(False);
          $fZpush = 0;
       }
-      else
-      {
-         $sqlImap = db_get_boolean(False);
-         $fImap = 0;
-      }
-
       if ($fActive == "on")
       {
          $sqlActive = db_get_boolean(True);
